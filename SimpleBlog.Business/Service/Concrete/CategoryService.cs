@@ -12,6 +12,12 @@ namespace SimpleBlog.Business.Service.Concrete
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repository;
+
+        public CategoryService(ICategoryRepository repository)
+        {
+            _repository = repository;
+        }
+
         public void Add(Category category)
         {
             _repository.Add(category);
@@ -30,6 +36,24 @@ namespace SimpleBlog.Business.Service.Concrete
         public Category Get(int id)
         {
             return _repository.Get(id);
+        }
+
+        public Category? GetByName(string name)
+        {
+            return _repository.GetByName(name);
+        }
+
+        public void ReplaceByExists(List<Category> categories)
+        {
+            for (int i = 0; i < categories.Count(); i++)
+            {
+                Category category = categories[i];
+                var isExists = GetByName(category.Name);
+                if(isExists is not null)
+                {
+                    categories[i] = isExists;
+                }
+            }
         }
 
         public void Update(Category category)

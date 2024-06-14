@@ -11,16 +11,18 @@ namespace SimpleBlog.Web.Controllers
     public class PostController : Controller
     {
         private readonly IPostService _postService;
+        private readonly ICategoryService _categoryService;
         private readonly IValidator<AddPostCategoryDTO> _categoryValidator;
         private readonly IValidator<AddPostDTO> _postValidator;
         private readonly IMapper _mapper;
 
-        public PostController(IPostService postService, IValidator<AddPostCategoryDTO> categoryValidator, IValidator<AddPostDTO> postValidator, IMapper mapper)
+        public PostController(IPostService postService, IValidator<AddPostCategoryDTO> categoryValidator, IValidator<AddPostDTO> postValidator, IMapper mapper, ICategoryService categoryService)
         {
             _postService = postService;
             _categoryValidator = categoryValidator;
             _postValidator = postValidator;
             _mapper = mapper;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index()
@@ -58,13 +60,15 @@ namespace SimpleBlog.Web.Controllers
                     }
                 }
             }
-
-            if(ModelState.ErrorCount > 0)
+            if (ModelState.ErrorCount > 0)
             {
                 return View(model);
             }
 
             Post post = _mapper.Map<Post>(model);
+            _categoryService.ReplaceByExists(post.Categories);
+
+
             _postService.Add(post);
             return RedirectToAction("Index");
         }

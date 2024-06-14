@@ -57,7 +57,7 @@ namespace SimpleBlog.DAL.Repository.Concrete
             return result;
         }
 
-        public Category GetByName(string name)
+        public Category? GetByName(string name)
         {
             var result = _context.Categories.Where(category => category.Name == name).FirstOrDefault();
             return result;

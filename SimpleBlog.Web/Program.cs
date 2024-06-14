@@ -15,10 +15,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BlogDbContext>(configure => configure.UseSqlServer("Data Source=localhost;Initial Catalog=SimpleBlog;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True"));
-builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
-builder.Services.AddTransient<IPostRepository, PostRepository>();   
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<IPostService, PostService>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<IPostRepository, PostRepository>();   
 builder.Services.AddScoped<IValidator<AddPostDTO>, AddPostDTOValidator>();
 builder.Services.AddScoped<IValidator<AddPostCategoryDTO>, AddPostCategoryDTOValidator>();
 builder.Services.AddAutoMapper(typeof(PostProfile), typeof(CategoryProfile));

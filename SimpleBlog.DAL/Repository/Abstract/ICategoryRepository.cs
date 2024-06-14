@@ -10,7 +10,7 @@ namespace SimpleBlog.DAL.Repository.Abstract
     public interface ICategoryRepository
     {
         public Category Get(int id);
-        public Category GetByName(string name);
+        public Category? GetByName(string name);
         public void Add(Category category);
         public void Update(Category category);
         public void Delete(int id);
