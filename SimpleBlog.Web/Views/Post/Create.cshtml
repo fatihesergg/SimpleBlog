@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Add new post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model AddPostDTO
+<div id="create_post" class="container bg-dark">
+    <div asp-validation-summary="All"></div>
+    <form id="create_post_form" asp-action="Create" method="post">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Title</label>
+            <input id="post_title" type="text" asp-for="Title" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <input type="text" class="form-control" id="category_input" />
+            <div class="mb-3 container" id="categories"></div>
+        </div>
+        <label class="form-label">Content</label>
+        <div id="editor" class="mb-3">
+        </div>
+        <input type="hidden" id="categoriesInput" name="CategoriesJson" />
+        <input type="hidden" id="post_content" asp-for="Content" name="name" />
+        <button class="btn btn-outline-light">Add New Post</button>
+    </form>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="/richtexteditor/rte_theme_default.css" />
+    <script type="text/javascript" src="/richtexteditor/rte.js"></script>
+    <script type="text/javascript" src='/richtexteditor/plugins/all_plugins.js'></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            var editor = new RichTextEditor("#editor");
+            editor.attachEvent('change', handleEditorChange);
+
+            var categoryArr = [];
+            window.categorys = categoryArr;
+            var categoryInput = document.getElementById('category_input');
+            var categoriesContainer = document.getElementById('categories');
+            var categoriesInputHidden = document.getElementById('categoriesInput');
+            var form = document.getElementById('create_post_form');
+            const title = document.getElementById('post_title');
+            const content = document.getElementById('post_content');
+
+            categoryInput.addEventListener('input', extractCategory);
+            form.addEventListener('submit', postForm);
+
+            function handleEditorChange() {
+                content.value = editor.getHTMLCode();
+            }
+
+
+            function postForm(event) {
+                event.preventDefault();
+                
+                const body = JSON.stringify({
+                    Title: title.value,
+                    Content: content.value,
+                    Categories: categoryArr,
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Post/Create',
+                    contentType: 'application/json',
+                    data: body,
+                });
+
+
+            }
+
+            function extractCategory(event) {
+                const value = event.target.value[event.target.value.length - 1];
+                if (value === " ") {
+                    if (event.target.value.length > 1) {
+                        categoryInput.value.trim();
+                        addCategory(categoryInput.value);
+
+                    }
+                    categoryInput.value = '';
+                }
+            }
+
+            function addCategory(category_name) {
+                categoryArr.push({ 'Name': category_name });
+                let last = categoryArr[categoryArr.length - 1];
+                renderCategory(last);
+
+
+            }
+
+            var removeCategory = function (category_element) {
+                const categoryName = category_element.target.innerText.replace('#', '');
+                const index = categoryArr.indexOf(categoryName);
+                delete categoryArr[index];
+                categoriesContainer.removeChild(category_element.target.parentNode);
+
+            }
+
+            function renderCategory(category) {
+                let categoryElement = document.createElement('div');
+                categoryElement.className = 'category-' + categoryArr.length;
+                categoryElement.innerHTML = `<button type="button" class="btn btn-outline-light">#${category.Name}</button>`;
+                categoryElement.addEventListener('click', removeCategory);
+                categoriesContainer.appendChild(categoryElement);
+            }
+
+        });
+    </script>
+}

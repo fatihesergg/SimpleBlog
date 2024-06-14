@@ -1,0 +1,15 @@
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\bin\Debug\net8.0\SimpleBlog.Business.deps.json
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\bin\Debug\net8.0\SimpleBlog.Business.dll
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\bin\Debug\net8.0\SimpleBlog.Business.pdb
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\SimpleBlog.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\SimpleBlog.Business.AssemblyInfoInputs.cache
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\SimpleBlog.Business.AssemblyInfo.cs
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\SimpleBlog.Business.csproj.CoreCompileInputs.cache
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\SimpleBlog.Business.dll
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\refint\SimpleBlog.Business.dll
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\SimpleBlog.Business.pdb
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\ref\SimpleBlog.Business.dll
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\bin\Debug\net8.0\SimpleBlog.DAL.dll
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\bin\Debug\net8.0\SimpleBlog.DAL.pdb
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\SimpleBlog.Business.csproj.AssemblyReference.cache
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Business\obj\Debug\net8.0\SimpleBl.BFDBB1F5.Up2Date
