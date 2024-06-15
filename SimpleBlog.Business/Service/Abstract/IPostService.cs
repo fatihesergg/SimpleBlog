@@ -1,4 +1,6 @@
-﻿using SimpleBlog.DAL.Models;
+﻿using FluentValidation.Results;
+using SimpleBlog.DAL.DTO;
+using SimpleBlog.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +17,6 @@ namespace SimpleBlog.Business.Service.Abstract
         public void Update(Post post);
         public void Delete(int id);
         public void Delete(Post post);
+        public ValidationResult ValidatePost(AddPostDTO dto);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using SimpleBlog.Business;
 using SimpleBlog.Business.Service.Abstract;
 using SimpleBlog.DAL.DTO;
 using SimpleBlog.DAL.Models;
@@ -10,19 +11,13 @@ namespace SimpleBlog.Web.Controllers
 {
     public class PostController : Controller
     {
-        private readonly IPostService _postService;
-        private readonly ICategoryService _categoryService;
-        private readonly IValidator<AddPostCategoryDTO> _categoryValidator;
-        private readonly IValidator<AddPostDTO> _postValidator;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public PostController(IPostService postService, IValidator<AddPostCategoryDTO> categoryValidator, IValidator<AddPostDTO> postValidator, IMapper mapper, ICategoryService categoryService)
+        public PostController(IMapper mapper,IUnitOfWork unitOfWork)
         {
-            _postService = postService;
-            _categoryValidator = categoryValidator;
-            _postValidator = postValidator;
             _mapper = mapper;
-            _categoryService = categoryService;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
@@ -39,7 +34,7 @@ namespace SimpleBlog.Web.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] AddPostDTO model)
         {
-            var postValidation = _postValidator.Validate(model);
+            var postValidation = _unitOfWork._postService.ValidatePost(model);
 
             if(!postValidation.IsValid)
             {
@@ -51,7 +46,7 @@ namespace SimpleBlog.Web.Controllers
 
             foreach(var category in model.Categories)
             {
-                var categoryValidation = _categoryValidator.Validate(category);
+                var categoryValidation = _unitOfWork._categoryService.ValidateCategory(category);
                 if (!categoryValidation.IsValid)
                 {
                     foreach(var err in categoryValidation.Errors)
@@ -66,10 +61,11 @@ namespace SimpleBlog.Web.Controllers
             }
 
             Post post = _mapper.Map<Post>(model);
-            _categoryService.ReplaceByExists(post.Categories);
+            _unitOfWork._categoryService.ReplaceByExists(post.Categories);
 
 
-            _postService.Add(post);
+            _unitOfWork._postService.Add(post);
+            _unitOfWork.SaveChanges();
             return RedirectToAction("Index");
         }
 

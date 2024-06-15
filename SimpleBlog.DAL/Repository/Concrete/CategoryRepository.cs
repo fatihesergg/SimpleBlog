@@ -20,7 +20,6 @@ namespace SimpleBlog.DAL.Repository.Concrete
         public void Add(Category category)
         {
             _context.Categories.Add(category);
-            _context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -30,7 +29,6 @@ namespace SimpleBlog.DAL.Repository.Concrete
             if ( category  is not null)
             {
                 _context.Categories.Remove(category);
-                _context.SaveChanges();
             }
         }
 
@@ -38,7 +36,6 @@ namespace SimpleBlog.DAL.Repository.Concrete
         {
             
             _context.Categories.Remove(category);
-            _context.SaveChanges();
         }
 
         public void DeleteByName(string name)
@@ -47,7 +44,6 @@ namespace SimpleBlog.DAL.Repository.Concrete
             if (result is not null)
             {
                 _context.Categories.Remove(result);
-                _context.SaveChanges();
             }
         }
 
@@ -66,7 +62,6 @@ namespace SimpleBlog.DAL.Repository.Concrete
         public void Update(Category category)
         {
             _context.Categories.Update(category);
-            _context.SaveChanges();
         }
     }
 }

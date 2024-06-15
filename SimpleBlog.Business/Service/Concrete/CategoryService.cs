@@ -1,4 +1,7 @@
-﻿using SimpleBlog.Business.Service.Abstract;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using SimpleBlog.Business.Service.Abstract;
+using SimpleBlog.DAL.DTO;
 using SimpleBlog.DAL.Models;
 using SimpleBlog.DAL.Repository.Abstract;
 using System;
@@ -12,10 +15,11 @@ namespace SimpleBlog.Business.Service.Concrete
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repository;
-
-        public CategoryService(ICategoryRepository repository)
+        private readonly IValidator<AddPostCategoryDTO> _validator;
+        public CategoryService(ICategoryRepository repository, IValidator<AddPostCategoryDTO> validator)
         {
             _repository = repository;
+            _validator = validator;
         }
 
         public void Add(Category category)
@@ -59,6 +63,12 @@ namespace SimpleBlog.Business.Service.Concrete
         public void Update(Category category)
         {
             _repository.Update(category);
+        }
+
+        public ValidationResult ValidateCategory(AddPostCategoryDTO dto)
+        {
+            var result = _validator.Validate(dto);
+            return result;
         }
     }
 }

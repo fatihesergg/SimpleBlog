@@ -21,13 +21,11 @@ namespace SimpleBlog.DAL.Repository.Concrete
         public void Add(Post post)
         {
             _context.Posts.Add(post);
-            _context.SaveChanges();
         }
 
         public void Delete(Post post)
         {
             _context.Posts.Remove(post);
-            _context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -36,7 +34,6 @@ namespace SimpleBlog.DAL.Repository.Concrete
             if (post is not null)
             {
                 _context.Posts.Remove(post);
-                _context.SaveChanges();
             }
         }
 
@@ -53,7 +50,6 @@ namespace SimpleBlog.DAL.Repository.Concrete
         public void Update(Post post)
         {
             _context.Posts.Update(post);
-            _context.SaveChanges();
         }
     }
 }

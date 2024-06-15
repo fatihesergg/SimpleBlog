@@ -1,4 +1,6 @@
-﻿using SimpleBlog.DAL.Models;
+﻿using FluentValidation.Results;
+using SimpleBlog.DAL.DTO;
+using SimpleBlog.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,6 @@ namespace SimpleBlog.Business.Service.Abstract
         public void Update(Category category);
         public void Delete(int id);
         public void Delete(Category category);
+        public ValidationResult ValidateCategory(AddPostCategoryDTO dto);
     }
 }

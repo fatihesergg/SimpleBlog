@@ -1,4 +1,7 @@
-﻿using SimpleBlog.Business.Service.Abstract;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using SimpleBlog.Business.Service.Abstract;
+using SimpleBlog.DAL.DTO;
 using SimpleBlog.DAL.Models;
 using SimpleBlog.DAL.Repository.Abstract;
 using System;
@@ -11,11 +14,13 @@ namespace SimpleBlog.Business.Service.Concrete
 {
     public class PostService : IPostService
     {
-        private IPostRepository _repository;
+        private readonly IPostRepository _repository;
+        private readonly IValidator<AddPostDTO> _validator;
 
-        public PostService(IPostRepository repository)
+        public PostService(IPostRepository repository, IValidator<AddPostDTO> validator)
         {
             _repository = repository;
+            _validator = validator;
         }
 
         public void Add(Post post)
@@ -49,5 +54,12 @@ namespace SimpleBlog.Business.Service.Concrete
         {
             _repository.Update(post);
         }
+
+        public ValidationResult ValidatePost(AddPostDTO dto)
+        {
+            var result = _validator.Validate(dto);
+            return result;
+        }
+
     }
 }
