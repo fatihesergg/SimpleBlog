@@ -5,7 +5,7 @@
 
 
 @model AddPostDTO
-<div id="create_post" class="container bg-dark">
+<div id="create_post" class="container">
     <span asp-validation-for="Title"></span>
     <span asp-validation-for="Categories"></span>
     <span asp-validation-for="Content"></span>
@@ -113,4 +113,11 @@
 
         });
     </script>
+    <style>
+        #create_post{
+            background-color: #191919;
+        }
+     </style>
 }
+
+          
