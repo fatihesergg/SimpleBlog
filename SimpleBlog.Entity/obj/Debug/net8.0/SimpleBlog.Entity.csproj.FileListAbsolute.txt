@@ -1,0 +1,12 @@
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\bin\Debug\net8.0\SimpleBlog.Entity.deps.json
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\bin\Debug\net8.0\SimpleBlog.Entity.dll
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\bin\Debug\net8.0\SimpleBlog.Entity.pdb
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\obj\Debug\net8.0\SimpleBlog.Entity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\obj\Debug\net8.0\SimpleBlog.Entity.AssemblyInfoInputs.cache
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\obj\Debug\net8.0\SimpleBlog.Entity.AssemblyInfo.cs
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\obj\Debug\net8.0\SimpleBlog.Entity.csproj.CoreCompileInputs.cache
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\obj\Debug\net8.0\SimpleBlog.Entity.sourcelink.json
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\obj\Debug\net8.0\SimpleBlog.Entity.dll
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\obj\Debug\net8.0\refint\SimpleBlog.Entity.dll
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\obj\Debug\net8.0\SimpleBlog.Entity.pdb
+C:\Users\fatih\Desktop\SimpleBlog\SimpleBlog.Entity\obj\Debug\net8.0\ref\SimpleBlog.Entity.dll

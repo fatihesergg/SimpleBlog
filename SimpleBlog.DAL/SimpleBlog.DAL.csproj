@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleBlog.Entity\SimpleBlog.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿using SimpleBlog.DAL.Models;
+﻿using SimpleBlog.Entity;
 using SimpleBlog.DAL.Repository.Abstract;
 using System;
 using System.Collections.Generic;

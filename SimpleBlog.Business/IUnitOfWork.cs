@@ -12,8 +12,6 @@ namespace SimpleBlog.Business
 {
     public interface IUnitOfWork
     {
-        public ICategoryRepository _categoryRepository { get; }
-        public IPostRepository _postRepository { get; }
         public ICategoryService _categoryService { get; }
         public IPostService _postService { get; }
         public IValidator<AddPostDTO> _postValidator { get; }

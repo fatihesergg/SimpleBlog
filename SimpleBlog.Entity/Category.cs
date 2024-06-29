@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleBlog.DAL.Models
+namespace SimpleBlog.Entity
 {
     public class Category
     {

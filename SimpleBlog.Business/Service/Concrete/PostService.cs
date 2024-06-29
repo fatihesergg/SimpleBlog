@@ -2,7 +2,7 @@
 using FluentValidation.Results;
 using SimpleBlog.Business.Service.Abstract;
 using SimpleBlog.DAL.DTO;
-using SimpleBlog.DAL.Models;
+using SimpleBlog.Entity;
 using SimpleBlog.DAL.Repository.Abstract;
 using System;
 using System.Collections.Generic;
