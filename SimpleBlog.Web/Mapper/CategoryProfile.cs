@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SimpleBlog.DAL.DTO;
-using SimpleBlog.DAL.Models;
+using SimpleBlog.Entity;
 
 namespace SimpleBlog.Web.Mapper
 {

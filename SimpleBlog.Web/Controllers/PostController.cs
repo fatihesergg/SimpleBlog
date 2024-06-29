@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SimpleBlog.Business;
 using SimpleBlog.Business.Service.Abstract;
 using SimpleBlog.DAL.DTO;
-using SimpleBlog.DAL.Models;
+using SimpleBlog.Entity;
 using SimpleBlog.Web.Validations;
 
 namespace SimpleBlog.Web.Controllers
@@ -22,7 +22,19 @@ namespace SimpleBlog.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+           var result =  _unitOfWork._postService.GetAll();
+            return View(result);
+        }
+
+        [HttpGet]
+        public IActionResult View(int id)
+        {
+            var result = _unitOfWork._postService.Get(id);
+            if(result == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(result);
         }
 
         [HttpGet]
@@ -66,7 +78,7 @@ namespace SimpleBlog.Web.Controllers
 
             _unitOfWork._postService.Add(post);
             _unitOfWork.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Post");
         }
 
         [HttpGet]

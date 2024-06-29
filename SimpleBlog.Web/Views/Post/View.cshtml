@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Post
+<div id="view_main" class="container mt-1  rounded shadow p-3 mb-4">
+    <div id="view_categories" style=";">
+        @foreach (var category in Model.Categories)
+        {
+            <div class="shadow p-3 pb-0">
+                <p id="view_post_category" class="text-muted">#@category.Name</p>
+            </div>
+        }
+    </div>
+    <div id="view_post_title" class="mb-5">
+        <h1>@Model.Title</h1>
+        <a  asp-action="Edit" asp-route-id="@Model.Id">
+            <svg class="mx-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16" style="--darkreader-inline-fill: currentColor;" data-darkreader-inline-fill="">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"></path>
+            </svg>
+        </a>
+    </div>
+    <div id="view_post_content" class="mb-5 p-4">
+        @Html.Raw(Model.Content)
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        #view_post_title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            #view_post_title h1 {
+                font-weight: bold;
+            }
+
+        #view_main {
+            width: 70%;
+        }
+
+        #view_categories {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+}

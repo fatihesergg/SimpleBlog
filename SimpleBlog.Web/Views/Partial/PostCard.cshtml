@@ -1,8 +1,15 @@
-﻿<div class="container">
-    <div class="col">
-        <img />
-    </div>
-    <div class="col">
-
+﻿@model Post
+<div id="post" class="container mt-1">
+    <div class="row rounded shadow p-3 mb-4">
+        <div class="col-md-4">
+            <img src="https://via.placeholder.com/250" class="img-fluid rounded" alt="Blog Post Image">
+        </div>
+        <div class="col-md-8">
+            <h3 id="post_title" class="mb-3">@Model.Title</h3>
+            <p id="post_category"class="text-muted"></p>
+            <div id="post_content" class="mb-3">@Html.Raw(Model.Content)</div>
+            <a asp-action="View" asp-route-id="@Model.Id" class="btn btn-primary">Daha Fazla...</a>
+        </div>
     </div>
 </div>
+
