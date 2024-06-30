@@ -1,7 +1,3 @@
-SimpleBlog.Business/bin/
-SimpleBlog.Business/obj/
-SimpleBlog.DAL/bin/
-SimpleBlog.DAL/obj/
-SimpleBlog.Web/bin/
-SimpleBlog.Web/obj/
+bin/
+obj/
 .vs/
