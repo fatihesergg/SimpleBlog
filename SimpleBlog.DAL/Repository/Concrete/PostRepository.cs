@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SimpleBlog.DAL.DTO;
 
 namespace SimpleBlog.DAL.Repository.Concrete
 {
@@ -49,7 +50,9 @@ namespace SimpleBlog.DAL.Repository.Concrete
 
         public void Update(Post post)
         {
-            _context.Posts.Update(post);
+            var query = _context.Posts.Find(post.Id);
+            query.Title = post.Title;
+            query.Content = post.Content;
         }
     }
 }

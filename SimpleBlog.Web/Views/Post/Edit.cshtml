@@ -3,13 +3,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-@model AddPostDTO
+@model Post
 <div id="create_post" class="container bg-dark">
-    <span asp-validation-for="Title"></span>
-    <span asp-validation-for="Categories"></span>
-    <span asp-validation-for="Content"></span>
     <form id="create_post_form" asp-action="Create" method="post">
+        <input id="post_id" type="hidden" asp-for=@Model.Id></input>
         <div class="mb-3 shadow">
             <label asp-for="Title" class="form-label">Title</label>
             <input id="post_title" type="text" asp-for="Title" class="form-control shadow" />
@@ -34,19 +31,23 @@
     <script type="text/javascript" src='/richtexteditor/plugins/all_plugins.js'></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        var isInserted = false;
 
+        document.addEventListener('DOMContentLoaded', function () {
             var editor = new RichTextEditor("#editor");
+            editor.insertHTML(editor.htmlDecode('@Model.Content'));
             editor.attachEvent('change', handleEditorChange);
 
+
+
             var categoryArr = [];
-            window.categorys = categoryArr;
             var categoryInput = document.getElementById('category_input');
             var categoriesContainer = document.getElementById('categories');
             var categoriesInputHidden = document.getElementById('categoriesInput');
             var form = document.getElementById('create_post_form');
             const title = document.getElementById('post_title');
             const content = document.getElementById('post_content');
+            const id = document.getElementById('post_id');
 
             categoryInput.addEventListener('input', extractCategory);
             form.addEventListener('submit', postForm);
@@ -60,6 +61,7 @@
                 event.preventDefault();
 
                 const body = JSON.stringify({
+                    Id: id.value,
                     Title: title.value,
                     Content: content.value,
                     Categories: categoryArr,
@@ -67,7 +69,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/Post/Create',
+                    url: '/Post/Edit',
                     contentType: 'application/json',
                     data: body,
                 });
@@ -87,7 +89,7 @@
                 }
             }
 
-            function addCategory(category_name) {
+            var addCategory = function (category_name) {
                 categoryArr.push({ 'Name': category_name });
                 let last = categoryArr[categoryArr.length - 1];
                 renderCategory(last);
@@ -111,6 +113,19 @@
                 categoriesContainer.appendChild(categoryElement);
             }
 
+            if (!isInserted) {
+
+        @foreach (var _category in Model.Categories)
+        {
+            @:addCategory('@_category.Name');
+
+        }
+                    isInserted = true;
+            }
+
         });
     </script>
+
+
+
 }

@@ -18,5 +18,6 @@ namespace SimpleBlog.Business.Service.Abstract
         public void Delete(int id);
         public void Delete(Post post);
         public ValidationResult ValidatePost(AddPostDTO dto);
+        public ValidationResult ValidatePost(Post model);
     }
 }

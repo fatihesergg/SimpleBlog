@@ -9,6 +9,7 @@ namespace SimpleBlog.Web.Mapper
         public CategoryProfile()
         {
             CreateMap<AddPostCategoryDTO, Category>();
+            CreateMap<AddPostCategoryDTO, Category>().ReverseMap();
         }
     }
 }

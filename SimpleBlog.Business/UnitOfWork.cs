@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SimpleBlog.Entity;
 
 namespace SimpleBlog.Business
 {
@@ -20,22 +21,32 @@ namespace SimpleBlog.Business
         public IPostRepository _postRepository { get; }
         public ICategoryService _categoryService { get; }
         public IPostService _postService { get; }
-        public IValidator<AddPostDTO> _postValidator { get; }
-        public IValidator<AddPostCategoryDTO> _categoryValidator { get; }
+        public IValidator<AddPostDTO> _postDTOValidator { get; }
+        public IValidator<AddPostCategoryDTO> _categoryDTOValidator { get; }
+        public IValidator<Post> _postValidator { get; }
+        public IValidator<Category> _categoryValidator { get; }
 
         private readonly BlogDbContext _context;
         public UnitOfWork(BlogDbContext context):base()
         {
             _context = context;
-
             if(this._postValidator == null)
             {
-                _postValidator = new AddPostDTOValidator();
+                _postValidator = new PostValidator();
+            }
+            if (this._categoryValidator == null)
+            {
+                _categoryValidator = new PostCategoryValidator();
             }
 
-            if(this._categoryValidator == null)
+            if(this._postDTOValidator == null)
             {
-                _categoryValidator  = new AddPostCategoryDTOValidator();
+                _postDTOValidator = new AddPostDTOValidator();
+            }
+
+            if(this._categoryDTOValidator == null)
+            {
+                _categoryDTOValidator  = new AddPostCategoryDTOValidator();
             }
 
             if (this._categoryRepository == null)
@@ -44,7 +55,7 @@ namespace SimpleBlog.Business
             }
             if (this._categoryService == null)
             {
-                _categoryService = new CategoryService(_categoryRepository, _categoryValidator);
+                _categoryService = new CategoryService(_categoryRepository, _categoryDTOValidator);
             }
             if(this._postRepository == null)
             {
@@ -52,7 +63,7 @@ namespace SimpleBlog.Business
             }
             if(this._postService == null)
             {
-                _postService = new PostService(_postRepository, _postValidator);
+                _postService = new PostService(_postRepository, _postDTOValidator,_postValidator);
             }
             
         }

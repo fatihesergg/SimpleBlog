@@ -19,5 +19,6 @@ namespace SimpleBlog.Business.Service.Abstract
         public void Delete(int id);
         public void Delete(Category category);
         public ValidationResult ValidateCategory(AddPostCategoryDTO dto);
+
     }
 }

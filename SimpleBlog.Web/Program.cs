@@ -1,5 +1,6 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using SimpleBlog.Business;
 using SimpleBlog.Business.Service.Abstract;
 using SimpleBlog.Business.Service.Concrete;
@@ -18,6 +19,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BlogDbContext>(configure => configure.UseSqlServer("Data Source=localhost;Initial Catalog=SimpleBlog;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True"),contextLifetime:ServiceLifetime.Singleton);
 builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(PostProfile), typeof(CategoryProfile));
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("MyRedisConStr");
+    options.InstanceName = "MyRedis";
+});
 
 var app = builder.Build();
 

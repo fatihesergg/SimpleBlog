@@ -9,6 +9,7 @@ namespace SimpleBlog.Web.Mapper
         public PostProfile()
         {
             CreateMap<AddPostDTO, Post>();
+            CreateMap<EditPostDTO, Post>();
         }
     }
 }
