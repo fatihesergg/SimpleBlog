@@ -89,7 +89,7 @@ namespace SimpleBlog.Web.Controllers
             var result = _unitOfWork._postService.Get(id);
             if (result == null)
             {
-                // Not Found
+                return View("NotFound");
             }
             return View(result);
         }
@@ -100,8 +100,7 @@ namespace SimpleBlog.Web.Controllers
             var queryPost = _unitOfWork._postService.Get(model.Id);
             if (queryPost == null)
             {
-                // TODO:return Post Not Found View
-                return NotFound();
+                return View("NotFound");
             }
 
             var postModel = _mapper.Map<EditPostDTO, Post>(model);
