@@ -9,7 +9,6 @@ using SimpleBlog.DAL.DTO;
 using SimpleBlog.DAL.Repository.Abstract;
 using SimpleBlog.DAL.Repository.Concrete;
 using SimpleBlog.Web.Mapper;
-using SimpleBlog.Web.Validations;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);

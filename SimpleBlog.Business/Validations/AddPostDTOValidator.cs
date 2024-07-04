@@ -9,7 +9,7 @@ namespace SimpleBlog.Business.Validations
         public AddPostDTOValidator()
         {
             RuleFor(post => post.Title).NotEmpty().WithMessage("Başlık boş olamaz.");
-            RuleFor(post => post.Title).Length(10, 25).WithMessage("Başlık en az 10,en fazla 25 karakter olmalı.");
+            RuleFor(post => post.Title).Length(10, 50).WithMessage("Başlık en az 10,en fazla 50 karakter olmalı.");
             RuleFor(post => post.Categories).NotEmpty().WithMessage("Kategori boş olamaz.");
         }
     }

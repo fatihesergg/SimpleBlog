@@ -6,7 +6,6 @@ using SimpleBlog.Business;
 using SimpleBlog.Business.Service.Abstract;
 using SimpleBlog.DAL.DTO;
 using SimpleBlog.Entity;
-using SimpleBlog.Web.Validations;
 using System.Diagnostics.Tracing;
 
 namespace SimpleBlog.Web.Controllers
@@ -80,7 +79,7 @@ namespace SimpleBlog.Web.Controllers
 
             _unitOfWork._postService.Add(post);
             _unitOfWork.SaveChanges();
-            return RedirectToAction("Index", "Post");
+            return RedirectToAction("index", "Post");
         }
 
         [HttpGet]
@@ -100,7 +99,7 @@ namespace SimpleBlog.Web.Controllers
             var queryPost = _unitOfWork._postService.Get(model.Id);
             if (queryPost == null)
             {
-                return View("NotFound");
+                return PartialView("NotFound",model);
             }
 
             var postModel = _mapper.Map<EditPostDTO, Post>(model);
@@ -129,7 +128,7 @@ namespace SimpleBlog.Web.Controllers
 
             if (ModelState.ErrorCount > 0)
             {
-                return View(model);
+                return View(postModel);
             }
             _unitOfWork._postService.Update(postModel);
             _unitOfWork._categoryService.ReplaceByExists(postModel.Categories);

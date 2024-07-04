@@ -1,23 +1,85 @@
 ﻿<nav class="navbar navbar-dark navbar-expand" style="background-color:#191919;">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-center">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Post" asp-action="Index">Anasayfa</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Post" asp-action="Create">Yeni Post</a>
-            <li class="nav-item">
-                <a class="nav-link">About</a>
-            </li>
-            </li>
-        </ul>
-    </div>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Post" asp-action="Index">Anasayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Post" asp-action="Create">Yeni Post</a>
+                </li>
+                <li class="nav-item">
+                    <div class="search-container">
+                        <i class="bi bi-search"></i>
+                        <input type="text" class="form-control search-input" placeholder="Search...">
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 
 <style>
-    .navbar-collapse {
-        display:flex;
+
+    .navbar {
+        display: flex;
+        align-items: center;
     }
+
+    .nav-item {
+        font-size: 15px;
+        margin-right: 20px;
+    }
+
+    .search-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .bi-search {
+        cursor: pointer;
+        font-size: 20px;
+        color: #fff;
+        transition: color 0.3s ease;
+    }
+
+    .search-input {
+        position: absolute;
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 30px;
+        padding: 0;
+        border: none;
+        outline: none;
+        border-radius: 3px;
+        opacity: 0;
+        transition: width 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+        font-size: 0.9rem;
+        background-color: #fff;
+        color: #333;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* :focus-within seçicisi ile arama kutusunu odaklandığında genişletiyoruz */
+    .search-container:focus-within .search-input {
+        width: 150px;
+        padding: 0 10px;
+        opacity: 1;
+    }
+
+    /* Hover efekt ile arama kutusunun üzerine gelindiğinde genişletme */
+    .search-container:hover .search-input {
+        width: 150px;
+        padding: 0 10px;
+        opacity: 1;
+    }
+
+    .search-container:hover .bi-search {
+        color: #aaa;
+    }
+
 </style>
+

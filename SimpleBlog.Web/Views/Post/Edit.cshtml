@@ -8,10 +8,12 @@
     <form id="create_post_form" asp-action="Create" method="post">
         <input id="post_id" type="hidden" asp-for=@Model.Id></input>
         <div class="mb-3 shadow">
+            <div id="validateTitle" class="text-danger"></div>
             <label asp-for="Title" class="form-label">Title</label>
             <input id="post_title" type="text" asp-for="Title" class="form-control shadow" />
         </div>
         <div class="mb-3">
+            <div id="validateCategory" class="text-danger"></div>
             <label class="form-label">Category</label>
             <input type="text" class="form-control shadow" id="category_input" />
             <div class="mb-3 container" id="categories"></div>
@@ -48,6 +50,14 @@
             const title = document.getElementById('post_title');
             const content = document.getElementById('post_content');
             const id = document.getElementById('post_id');
+            let isValid = false;
+
+            title.addEventListener("change", function (e) {
+                if (this.value != "") {
+                    checkTitle(this.value);
+                }
+            });
+
 
             categoryInput.addEventListener('input', extractCategory);
             form.addEventListener('submit', postForm);
@@ -59,20 +69,20 @@
 
             function postForm(event) {
                 event.preventDefault();
-
-                const body = JSON.stringify({
-                    Id: id.value,
-                    Title: title.value,
-                    Content: content.value,
-                    Categories: categoryArr,
-                });
-
-                $.ajax({
-                    type: 'POST',
-                    url: '/Post/Edit',
-                    contentType: 'application/json',
-                    data: body,
-                });
+                if (isValid) {
+                    const body = JSON.stringify({
+                        Id: id.value,
+                        Title: title.value,
+                        Content: content.value,
+                        Categories: categoryArr,
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Post/Edit',
+                        contentType: 'application/json',
+                        data: body,
+                    });
+                }
 
 
             }
@@ -82,7 +92,12 @@
                 if (value === " ") {
                     if (event.target.value.length > 1) {
                         categoryInput.value.trim();
-                        addCategory(categoryInput.value);
+                        checkCategory(categoryInput.value);
+                        if (isValid === true) {
+                            addCategory(categoryInput.value);
+                        }
+
+
 
                     }
                     categoryInput.value = '';
@@ -111,6 +126,28 @@
                 categoryElement.innerHTML = `<button type="button" class="btn btn-outline-light">#${category.Name}</button>`;
                 categoryElement.addEventListener('click', removeCategory);
                 categoriesContainer.appendChild(categoryElement);
+            }
+
+            function checkTitle(value) {
+                const validateTitle = document.getElementById('validateTitle');
+                if (value.length < 20 || value.length > 50) {
+                    isValid = false;
+                    validateTitle.innerText = 'Başlık uzunluğu en az 20 en fazla 50 karakter olmalı.';
+                } else {
+                    isValid = true;
+                    validateTitle.innerText = '';
+                }
+            }
+
+            function checkCategory(value) {
+                const validateCategory = document.getElementById('validateCategory');
+                if (value.length < 2 || value.length > 15) {
+                    isValid = false;
+                    validateCategory.innerText = 'Kategori en az 2 en çok 15 karakter olmalı';
+                } else {
+                    isValid = true;
+                    validateCategory.innerText = '';
+                }
             }
 
             if (!isInserted) {
