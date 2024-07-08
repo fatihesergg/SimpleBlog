@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SimpleBlog.Entity;
 using System;
 using System.Collections.Generic;
@@ -8,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace SimpleBlog.DAL
 {
-    public class BlogDbContext:DbContext
+    public class BlogDbContext:IdentityDbContext<User>
     {
         public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
 
-        public BlogDbContext(DbContextOptions options):base(options)
+        public BlogDbContext(DbContextOptions<BlogDbContext> options):base(options)
         {
             
         }

@@ -14,6 +14,7 @@ namespace SimpleBlog.Entity
         public DateTime PublishDate = DateTime.Now;
         public DateTime LastEditDate = DateTime.Now;
         public List<Category> Categories { get; set; }
+        public string ImagePath { get; set; }
 
 
     }

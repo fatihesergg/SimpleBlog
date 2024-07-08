@@ -11,6 +11,10 @@
     <span asp-validation-for="Content"></span>
     <form id="create_post_form" asp-action="Create" method="post">
         <div class="mb-3 shadow">
+            <label  class="form-label" asp-for="formFile">Image</label>
+            <input type="file" asp-for="formFile" class="form-control" id="post_image"/>
+        </div>
+        <div class="mb-3 shadow">
             <div id="validateTitle" class="text-danger"></div>
             <label asp-for="Title" class="form-label">Title</label>
             <input id="post_title" type="text" asp-for="Title" class="form-control shadow" />
@@ -49,6 +53,7 @@
             var form = document.getElementById('create_post_form');
             const title = document.getElementById('post_title');
             const content = document.getElementById('post_content');
+            const formFile = document.getElementById('post_image');
             let isValid = false;
 
             title.addEventListener("change", function (e) {
@@ -72,6 +77,7 @@
                     Title: title.value,
                     Content: content.value,
                     Categories: categoryArr,
+                        fromFile: formFile.files[0],
                 });
 
                 $.ajax({

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using SimpleBlog.Business;
@@ -28,6 +29,7 @@ namespace SimpleBlog.Web.Controllers
         }
 
         [HttpGet]
+        
         public IActionResult View(int id)
         {
             var result = _unitOfWork._postService.Get(id);
@@ -39,12 +41,14 @@ namespace SimpleBlog.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create([FromBody] AddPostDTO model)
         {
             var postValidation = _unitOfWork._postService.ValidatePost(model);
@@ -83,6 +87,7 @@ namespace SimpleBlog.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit(int id)
         {
             var result = _unitOfWork._postService.Get(id);
@@ -94,6 +99,7 @@ namespace SimpleBlog.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Edit([FromBody] EditPostDTO model)
         {
             var queryPost = _unitOfWork._postService.Get(model.Id);

@@ -1,4 +1,5 @@
-﻿using SimpleBlog.Entity;
+﻿using Microsoft.AspNetCore.Http;
+using SimpleBlog.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,6 @@ namespace SimpleBlog.DAL.DTO
         public string Title { get; set; }
         public string Content { get; set; }
         public List<AddPostCategoryDTO> Categories { get; set; }
+        public IFormFile formFile { get; set; }
     }
 }

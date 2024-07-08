@@ -14,9 +14,12 @@
     </div>
     <div id="view_post_title" class="mb-5">
         <h1>@Model.Title</h1>
-        <a id="edit_link" asp-action="Edit" asp-route-id="@Model.Id">
-            <i id="edit_icon" class="bi bi-pen-fill"></i>
-        </a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a id="edit_link" asp-action="Edit" asp-route-id="@Model.Id">
+                <i id="edit_icon" class="bi bi-pen-fill"></i>
+            </a>
+        }
     </div>
     <div id="view_post_content" class="mb-5 p-4">
         @Html.Raw(Model.Content)
